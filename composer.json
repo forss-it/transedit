@@ -1,0 +1,43 @@
+{
+    "name": "dialect/transedit",
+    "type": "library",
+    "description": "Translations with inline edit support",
+    "keywords": [
+        "Dialect",
+        "translate"
+    ],
+    "homepage": "https://github.com/dialect-katrineholm/transedit",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dialect Katrineholm",
+            "email": "markus.stromgren@dialect.se",
+            "homepage": "https://github.com/dialect-katrineholm",
+            "role": "Developer"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dialect\\TransEdit\\": "src"
+        },
+        "files": ["src/functions.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dialect\\TransEdit\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dialect\\TransEdit\\TransEditServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "genealabs/laravel-model-caching": "^0.2.51"
+    }
+}

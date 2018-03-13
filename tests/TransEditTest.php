@@ -87,4 +87,22 @@ class TransEditTest extends  \Dialect\TransEdit\TestCase {
 
 		$this->assertEquals(get_class($transEdit->key($key)), 'Illuminate\Support\HtmlString');
 	}
+
+	/** @test */
+	public function it_can_enable_edit_mode(){
+		transEdit()->enableEditMode();
+		$this->assertTrue(session('transedit-edit-mode-on'));
+	}
+
+	/** @test */
+	public function it_can_disable_edit_mode(){
+		transEdit()->disableEditMode();
+		$this->assertFalse(session('transedit-edit-mode-on'));
+	}
+
+	/** @test */
+	public function it_can_change_current_locale(){
+		transEdit()->setCurrentLocale('en');
+		$this->assertEquals(session('transedit-current-locale'), 'en');
+	}
 }

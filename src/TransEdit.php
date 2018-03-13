@@ -27,8 +27,19 @@ class TransEdit{
 		return $this;
 	}
 
+	public function setCurrentLocale($locale){
+		if(transEdit()->localeExists($locale)){
+			session(['transedit-current-locale' => $locale]);
+		}
+		else{
+			session(['transedit-current-locale' => null]);
+		}
+		$this->setLocaleToCurrent();
+		return $this;
+	}
+
 	public function localeExists($locale){
-		return $locale::where('name', $locale)->first() != null;
+		return Locale::where('name', $locale)->first() != null;
 	}
 
 	private function setLocaleToCurrent(){
@@ -79,6 +90,16 @@ class TransEdit{
 	protected function returnVueComponent($key, $val){
 
 		return new HtmlString('<transedit tekey="'.htmlentities($key).'" teval="'.htmlentities($val).'"></transedit>');
+	}
+
+	public function enableEditMode(){
+		session(['transedit-edit-mode-on' => true]);
+		$this->editMode = true;
+	}
+
+	public function disableEditMode(){
+		session(['transedit-edit-mode-on' => false]);
+		$this->editMode = true;
 	}
 
 

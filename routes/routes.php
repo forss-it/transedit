@@ -1,4 +1,4 @@
 <?php
 
-Route::post('/transedit/setkey', 'TransEditController@setKey');
-Route::get('/transedit/locales', 'TransEditController@locales');
+Route::post('/transedit/setkey', '\Dialect\TransEdit\Controllers\TransEditController@setKey');
+Route::get('/transedit/locales', '\Dialect\TransEdit\Controllers\TransEditController@locales');

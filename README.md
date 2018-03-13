@@ -29,7 +29,7 @@ Migrate database
 
 ``` php
        ##Locale##
-       A locale is automatically created when a key is set or if a locale language name is set.
+       //A locale is automatically created when a key is set or if a locale language name is set.
        transEdit()->setLocaleLanguageName('locale', 'language-name'); //e.g en, English
         
        ##set key##

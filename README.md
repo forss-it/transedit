@@ -1,7 +1,7 @@
 # TransEdit
 TransEdit stores localizations in a database with built-in cache support. It also has support to enable a edit-mode that allows the user to edit translations directly in the web-browser by double-clicking the highlighted texts.
 
-##Installation
+## Installation
 
 Install via composer
 
@@ -19,13 +19,13 @@ Migrate database
      
      php artisan migrate
      
-##Publishes
+## Publishes
 
     Controller => app/http/contollers/
     Config => config/
     Migrations database/migrations/
 
-##Example
+## Example
 
 ``` php
        ##set key##

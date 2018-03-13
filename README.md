@@ -2,6 +2,7 @@
 TransEdit stores localizations in a database with built-in cache support. It also has support to enable a edit-mode that allows the user to edit translations directly in the web-browser by double-clicking the highlighted texts.
 
 ##Installation
+
 Install via composer
 
     composer require dialect/transedit
@@ -50,6 +51,9 @@ Migrate database
        ##Enable/Disable edit-mode
        transEdit()->enableEditMode();
        transEdit()->disableEditMode();
+       
+       //When you set locale or edit-mode it will only be set for the current session. 
+       //That means multiple users can have different settings.
        
        
 ```

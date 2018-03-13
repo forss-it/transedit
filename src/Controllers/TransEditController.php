@@ -1,14 +1,12 @@
 <?php
 namespace Dialect\TransEdit\Controllers;
 use Dialect\TransEdit\Models\Locale;
-use Illuminate\Routing\Controller;
 
-class TransEditController extends Controller{
+use Illuminate\Routing\Controller as BaseController;
+
+class TransEditController extends BaseController {
 
 	public function setKey(){
-		if(!session('transedit-edit-mode-in')){
-			abort(403);
-		}
 		transEdit()->locale(request('locale'))->setKey(request('key'), request('val'));
 
 		return transEdit(request('key'));

@@ -15,7 +15,7 @@ class TransEditServiceProvider extends ServiceProvider {
 		$this->loadMigrationsFrom(__DIR__ . '/../migrations');
 		$this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
 		$this->publishes([
-			__DIR__.'Controllers' => app_path('Http/Controllers'),
+			__DIR__.'/Controllers' => app_path('Http/Controllers'),
 			__DIR__ . '/../migrations' => database_path('/migrations/'),
 			__DIR__ .'/../config/transedit.php' => config_path('tranedit.php')
 		]);

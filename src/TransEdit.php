@@ -74,7 +74,7 @@ class TransEdit{
 
 	protected function returnVueComponent($key, $val){
 
-		return new HtmlString('<transedit key="'.htmlentities($key).'" val="'.htmlentities($val).'"></transedit>');
+		return new HtmlString('<transedit tekey="'.htmlentities($key).'" teval="'.htmlentities($val).'"></transedit>');
 	}
 
 

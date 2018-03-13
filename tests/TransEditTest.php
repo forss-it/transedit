@@ -85,6 +85,6 @@ class TransEditTest extends  \Dialect\TransEdit\TestCase {
 		transEdit()->key($key, $val);
 		$transEdit = new \Dialect\TransEdit\TransEdit(true);
 
-		$this->assertEquals('<transedit key="'.$key.'" val="'.$val.'"></transedit>', $transEdit->key($key));
+		$this->assertEquals(get_class($transEdit->key($key)), 'Illuminate\Support\HtmlString');
 	}
 }

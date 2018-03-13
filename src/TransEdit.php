@@ -4,6 +4,7 @@ namespace Dialect\TransEdit;
 use Dialect\TransEdit\Models\Key;
 use Dialect\TransEdit\Models\Locale;
 use Dialect\TransEdit\Models\Translation;
+use Illuminate\Support\HtmlString;
 
 class TransEdit{
 	protected $locale;
@@ -72,7 +73,8 @@ class TransEdit{
 	}
 
 	protected function returnVueComponent($key, $val){
-		return '<transedit key="'.$key.'" val="'.$val.'"></transedit>';
+
+		return new HtmlString('<transedit key="'.htmlentities($key).'" val="'.htmlentities($val).'"></transedit>');
 	}
 
 

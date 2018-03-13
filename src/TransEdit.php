@@ -11,14 +11,14 @@ class TransEdit{
 	protected $editMode;
 	function __construct($editMode = false) {
 
-		$this->setLocaleToDefault();
+		$this->setLocaleToCurrent();
 		$this->editMode = $editMode ? $editMode : session('transedit-edit-mode-on');
 
 	}
 
-	public function locale($locale = 'default'){
-		if(!$locale || $locale === 'default'){
-			$this->setLocaleToDefault();
+	public function locale($locale = 'current'){
+		if(!$locale || $locale === 'current'){
+			$this->setLocaleToCurrent();
 		}
 		else{
 			$this->locale = $locale;
@@ -27,8 +27,12 @@ class TransEdit{
 		return $this;
 	}
 
-	private function setLocaleToDefault(){
-		$this->locale = config('transedit.default_locale', 'en');
+	public function localeExists($locale){
+		return $locale::where('name', $locale)->first() != null;
+	}
+
+	private function setLocaleToCurrent(){
+		$this->locale = session('transedit-current-locale', config('transedit.default_locale', 'en'));
 	}
 
 	public function key($key, $val = null){
@@ -76,6 +80,8 @@ class TransEdit{
 
 		return new HtmlString('<transedit tekey="'.htmlentities($key).'" teval="'.htmlentities($val).'"></transedit>');
 	}
+
+
 
 
 }

@@ -12,6 +12,17 @@ class TransEditController extends BaseController {
 		return transEdit(request('key'));
 	}
 
+	public function setCurrentLocale(){
+		if(!transEdit()->localeExists(request('locale'))){
+			session(['transedit-current-locale' => request('locale')]);
+		}
+		else{
+			session(['transedit-current-locale' => null]);
+		}
+
+		return redirect()->back();
+	}
+
 	public function locales(){
 		return Locale::all();
 	}

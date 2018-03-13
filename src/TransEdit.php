@@ -42,6 +42,17 @@ class TransEdit{
 		return Locale::where('name', $locale)->first() != null;
 	}
 
+	public function setLocaleLanguageName($locale, $language){
+		$localeModel = Locale::firstOrCreate([
+			'name' => $locale
+		]);
+		$localeModel->update([
+			'language' => $language
+		]);
+
+		return $this;
+	}
+
 	private function setLocaleToCurrent(){
 		$this->locale = session('transedit-current-locale', config('transedit.default_locale', 'en'));
 	}

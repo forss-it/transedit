@@ -105,4 +105,17 @@ class TransEditTest extends  \Dialect\TransEdit\TestCase {
 		transEdit()->setCurrentLocale('en');
 		$this->assertEquals(session('transedit-current-locale'), 'en');
 	}
+
+	/** @test */
+	public function it_can_set_locale_language_name(){
+		$locale = str_random(2);
+		$name = str_random(10);
+		transEdit()->setLocaleLanguageName($locale, $name);
+
+		$this->assertDatabaseHas('transedit_locales', [
+			'name' => $locale,
+			'language' => $name
+		]);
+
+	}
 }

@@ -14,10 +14,11 @@ class CreateTranseditLocalesTable extends Migration
 		Schema::create('transedit_locales', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name')->unique();
+			$table->string('language')->nullable();
 			$table->timestamps();
 		});
 
-		\Dialect\TransEdit\Models\Locale::create(['name' => 'en']);
+		\Dialect\TransEdit\Models\Locale::create(['name' => 'en', 'English']);
 	}
 	/**
 	 * Reverse the migrations.

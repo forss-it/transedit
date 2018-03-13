@@ -26,7 +26,7 @@ Migrate database
 
 ##Example
 
-    ``` php
+``` php
        ##set key##
        
        transEdit()->setKey('key', 'val');
@@ -52,5 +52,5 @@ Migrate database
        transEdit()->disableEditMode();
        
        
-    ```
+```
 

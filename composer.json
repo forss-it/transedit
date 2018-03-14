@@ -1,17 +1,21 @@
 {
     "name": "dialect/transedit",
     "type": "library",
-    "description": "Translations with inline edit support",
+    "description": "Translations for Laravel with inline edit support",
     "keywords": [
-        "Dialect",
-        "translate"
+        "dialect",
+        "translate",
+        "transedit",
+        "laravel",
+        "vue",
+        "database"
     ],
     "homepage": "https://github.com/dialect-katrineholm/transedit",
     "license": "MIT",
     "authors": [
         {
             "name": "Dialect Katrineholm",
-            "email": "markus.stromgren@dialect.se",
+            "email": "katrineholm@dialect.se",
             "homepage": "https://github.com/dialect-katrineholm",
             "role": "Developer"
         }

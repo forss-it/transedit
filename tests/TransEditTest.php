@@ -133,4 +133,24 @@ class TransEditTest extends \Dialect\TransEdit\TestCase
             'language' => $name,
         ]);
     }
+
+    /** @test */
+    public function it_can_get_all_translations_for_key(){
+	    $locale1 = str_random(2);
+	    $locale2 = str_random(3);
+	    $key = str_random(4);
+	    $value1 = str_random(3);
+	    $value2 = str_random(4);
+
+	    transEdit()->locale($locale1)->setKey($key, $value1);
+	    transEdit()->locale($locale2)->setKey($key, $value2);
+	    $translations = transEdit()->getAllTranslationsForKey($key);
+	
+	    $this->assertCount(3, $translations);
+	    $this->assertContains($value1, $translations);
+	    $this->assertContains($value2, $translations);
+	    $this->assertContains($key, $translations);
+
+
+    }
 }

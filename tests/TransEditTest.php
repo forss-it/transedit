@@ -152,4 +152,15 @@ class TransEditTest extends \Dialect\TransEdit\TestCase
         $this->assertContains($value2, $translations);
         $this->assertContains($key, $translations);
     }
+
+    /** @test */
+    public function it_uses_fallback_locale_if_no_translation_is_found()
+    {
+        config()->set('transedit.fallback_locale', 'en');
+
+        $key = str_random(4);
+        $value = str_random(5);
+        transEdit()->locale('en')->setKey($key, $value);
+        $this->assertEquals(transEdit()->locale('foo')->getKey($key), $value);
+    }
 }

@@ -91,10 +91,10 @@ class TransEdit
         return $this;
     }
 
-    public function getKey($key)
+    public function getKey($key, $locale = null)
     {
-        $translation = Translation::whereHas('locale', function ($query) {
-            return $query->where('name', $this->locale);
+        $translation = Translation::whereHas('locale', function ($query) use ($locale) {
+            return $query->where('name', $locale ? $locale : $this->locale);
         })->whereHas('key', function ($query) use ($key) {
             return $query->where('name', $key);
         })->first();
@@ -109,6 +109,17 @@ class TransEdit
     protected function returnVueComponent($key, $val)
     {
         return new HtmlString('<transedit tekey="'.htmlentities($key).'" teval="'.htmlentities($val).'"></transedit>');
+    }
+
+    public function getAllTranslationsForKey($key)
+    {
+        $result = collect();
+        $locales = Locale::all();
+        foreach ($locales as $locale) {
+            $result->put($locale->name, $this->getKey($key, $locale->name));
+        }
+
+        return $result;
     }
 
     public function enableEditMode()

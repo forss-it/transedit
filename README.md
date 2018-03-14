@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/dialect-katrineholm/transedit.svg?token=9jwqzmZxpdyqbmtqpE8y&branch=master)](https://travis-ci.com/dialect-katrineholm/transedit)
 
 # TransEdit
-TransEdit stores localizations in a database with built-in cache support. It also has support to enable a edit-mode that allows the user to edit translations directly in the web-browser by double-clicking the highlighted texts.
+TransEdit stores localizations in a database with built-in cache support. It also has support to enable an edit-mode that allows the user to edit translations directly in the browser by double-clicking the highlighted texts.
 
 ## Installation
 
@@ -35,9 +35,8 @@ Migrate database
        transEdit()->setLocaleLanguageName('locale', 'language-name'); //e.g en, English
         
        ##set key##
-       
        transEdit()->setKey('key', 'val');
-       transEdit()->locale('locale')->setKey(..); //TransEdit automatically creates missing locale.
+       transEdit()->locale('locale')->setKey(..); //TransEdit automatically creates missing locales.
        
        //you can use the helper functions to quicker set keys
        transEdit()->key('key', 'value');

@@ -95,8 +95,8 @@ class TransEdit
     {
         $translation = $this->getTranslationFromKey($key, $locale);
 
-        if(!$translation && config('transedit.fallback_locale')){
-	        $translation = $this->getTranslationFromKey($key, config('transedit.fallback_locale'));
+        if (! $translation && config('transedit.fallback_locale')) {
+            $translation = $this->getTranslationFromKey($key, config('transedit.fallback_locale'));
         }
         $value = $translation ? $translation->value : $key;
         if ($this->editMode) {
@@ -106,12 +106,13 @@ class TransEdit
         return $value;
     }
 
-    protected function getTranslationFromKey($key, $locale){
-    	return $translation = Translation::whereHas('locale', function ($query) use ($locale) {
-				    return $query->where('name', $locale ? $locale : $this->locale);
-			    })->whereHas('key', function ($query) use ($key) {
-				    return $query->where('name', $key);
-			    })->first();
+    protected function getTranslationFromKey($key, $locale)
+    {
+        return $translation = Translation::whereHas('locale', function ($query) use ($locale) {
+            return $query->where('name', $locale ? $locale : $this->locale);
+        })->whereHas('key', function ($query) use ($key) {
+            return $query->where('name', $key);
+        })->first();
     }
 
     protected function returnVueComponent($key, $val)

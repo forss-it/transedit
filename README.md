@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/dialect-katrineholm/transedit.svg?token=9jwqzmZxpdyqbmtqpE8y&branch=master)](https://travis-ci.com/dialect-katrineholm/transedit)
+
 # TransEdit
 TransEdit stores localizations in a database with built-in cache support. It also has support to enable a edit-mode that allows the user to edit translations directly in the web-browser by double-clicking the highlighted texts.
 

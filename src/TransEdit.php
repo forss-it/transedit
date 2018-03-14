@@ -93,7 +93,7 @@ class TransEdit
 
     public function getKey($key, $locale = null)
     {
-        $translation = Translation::whereHas('locale', function ($query)use ($locale) {
+        $translation = Translation::whereHas('locale', function ($query) use ($locale) {
             return $query->where('name', $locale ? $locale : $this->locale);
         })->whereHas('key', function ($query) use ($key) {
             return $query->where('name', $key);
@@ -111,14 +111,15 @@ class TransEdit
         return new HtmlString('<transedit tekey="'.htmlentities($key).'" teval="'.htmlentities($val).'"></transedit>');
     }
 
-    public function getAllTranslationsForKey($key){
-    	$result = collect();
-    	$locales = Locale::all();
-    	foreach($locales as $locale){
-    		$result->put($locale->name, $this->getKey($key, $locale->name));
-	    }
+    public function getAllTranslationsForKey($key)
+    {
+        $result = collect();
+        $locales = Locale::all();
+        foreach ($locales as $locale) {
+            $result->put($locale->name, $this->getKey($key, $locale->name));
+        }
 
-	    return $result;
+        return $result;
     }
 
     public function enableEditMode()

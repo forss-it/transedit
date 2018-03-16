@@ -11,17 +11,22 @@ class TransEditServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
-        $this->loadRoutesFrom(__DIR__.'/../routes/transedit.php');
-        $this->publishes([
-            __DIR__.'/Controllers' => app_path('Http/Controllers'),
-            __DIR__.'/../migrations' => database_path('/migrations/'),
-            __DIR__.'/../config/transedit.php' => config_path('tranedit.php'),
-            __DIR__.'/../assets/' => resource_path('assets'),
-        ]);
-    }
+	public function boot()
+	{
+		$this->loadRoutesFrom(__DIR__.'/../routes/transedit.php');
+		$this->publishes([
+			__DIR__.'/../migrations' => database_path('migrations'),
+		], 'migrations');
+
+		$this->publishes([
+			__DIR__.'/../config/transedit.php' => config_path('tranedit.php'),
+		], 'config');
+
+		$this->publishes([
+			__DIR__.'/../assets/' => resource_path('assets'),
+		], 'assets');
+
+	}
 
     /**
      * Register any package services.

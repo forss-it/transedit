@@ -19,7 +19,7 @@ class TransEditServiceProvider extends ServiceProvider
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../config/transedit.php' => config_path('tranedit.php'),
+            __DIR__.'/../config/transedit.php' => config_path('transedit.php'),
         ], 'config');
 
         $this->publishes([

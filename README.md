@@ -23,7 +23,7 @@ Migrate database
      
 ## Publishes
 
-    Controller => app/http/contollers/
+    Assets => resource/assets
     Config => config/
     Migrations database/migrations/
 

@@ -18,6 +18,6 @@ class Translation extends Model
 
     public function key()
     {
-        return $this->belongsTo(key::class);
+        return $this->belongsTo(Key::class);
     }
 }

@@ -114,14 +114,14 @@ class TransEditTest extends \Dialect\TransEdit\TestCase
         $this->assertFalse(session('transedit-edit-mode-on'));
     }
 
-	/** @test */
-	public function it_can_check_if_edit_mode_is_enabled()
-	{
-		transEdit()->disableEditMode();
-		$this->assertFalse(transEdit()->editModeIsEnabled());
-		transEdit()->enableEditMode();
-		$this->assertTrue(transEdit()->editModeIsEnabled());
-	}
+    /** @test */
+    public function it_can_check_if_edit_mode_is_enabled()
+    {
+        transEdit()->disableEditMode();
+        $this->assertFalse(transEdit()->editModeIsEnabled());
+        transEdit()->enableEditMode();
+        $this->assertTrue(transEdit()->editModeIsEnabled());
+    }
 
     /** @test */
     public function it_can_change_current_locale()

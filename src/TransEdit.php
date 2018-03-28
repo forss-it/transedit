@@ -140,6 +140,11 @@ class TransEdit
     public function disableEditMode()
     {
         session(['transedit-edit-mode-on' => false]);
-        $this->editMode = true;
+        $this->editMode = false;
+    }
+
+    public function editModeIsEnabled()
+    {
+        return $this->editMode;
     }
 }

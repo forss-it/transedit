@@ -1,6 +1,6 @@
 <template>
-   <div>
-      <span class="editable" @dblclick="startEditMode()">
+   <div @click.prevent="" class="transedit-container">
+      <span class="editable"  @dblclick="startEditMode()">
          {{val}}
       </span>
       <div class="edit-window" v-if="editMode">
@@ -66,11 +66,16 @@
     }
 </script>
 <style>
+   .transedit-container{
+      display: inline;
+   }
    .editable{
       background-color: #FFFAC1;
+      color: #000;
 
    }
    .edit-window {
+      z-index: 400;
       position: absolute;
       background-color: #fefefe;
       margin: auto;

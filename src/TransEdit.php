@@ -143,8 +143,8 @@ class TransEdit
         $this->editMode = false;
     }
 
-	public function editModeIsEnabled()
-	{
-		return $this->editMode;
-	}
+    public function editModeIsEnabled()
+    {
+        return $this->editMode;
+    }
 }

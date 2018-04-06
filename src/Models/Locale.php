@@ -15,4 +15,7 @@ class Locale extends Model
     {
         return $this->hasMany(Translation::class);
     }
+
+
+
 }

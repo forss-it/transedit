@@ -172,4 +172,42 @@ class TransEditTest extends \Dialect\TransEdit\TestCase
         transEdit()->locale('en')->setKey($key, $value);
         $this->assertEquals(transEdit()->locale('foo')->getKey($key), $value);
     }
+
+    /** @test */
+    public function it_can_get_all_keys_for_locale()
+    {
+        $locale1 = str_random(2);
+        $locale2 = str_random(3);
+        $key1 = str_random(2);
+        $key2 = str_random(3);
+        $key3 = str_random(4);
+        $value1 = str_random(5);
+        $value2 = str_random(6);
+        $value3 = str_random(7);
+        transEdit()->locale($locale1)->setKey($key1, $value1);
+        transEdit()->locale($locale1)->setKey($key2, $value2);
+        transEdit()->locale($locale2)->setKey($key3, $value3);
+
+        $translations = transEdit()->getAllTranslationsForLocale($locale1);
+        $this->assertCount(3, $translations);
+        $this->assertContains($value1, $translations);
+        $this->assertContains($value2, $translations);
+        $this->assertContains($key3, $translations);
+
+        $this->assertNotContains($value3, $translations);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_get_javascript_translation_file()
+    {
+        $key1 = str_random(2);
+        $key2 = str_random(3);
+        $value1 = str_random(5);
+        $value2 = str_random(6);
+        transEdit()->setKey($key1, $value1);
+        transEdit()->setKey($key2, $value2);
+        $this->get('/js/transedit.js')->assertStatus(200)->assertHeader('Content-Type', 'application/javascript');
+    }
 }

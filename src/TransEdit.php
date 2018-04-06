@@ -63,6 +63,11 @@ class TransEdit
         $this->locale = session('transedit-current-locale', config('transedit.default_locale', 'en'));
     }
 
+    public function getCurrentLocale()
+    {
+        return $this->locale;
+    }
+
     public function key($key, $val = null)
     {
         if ($val) {
@@ -129,6 +134,23 @@ class TransEdit
         }
 
         return $result;
+    }
+
+    public function getAllTranslationsForLocale($locale)
+    {
+        $locale = Locale::where('name', $locale)->first();
+
+        if (! $locale) {
+            return collect();
+        }
+        $keys = Key::all();
+
+        $translations = collect();
+        foreach ($keys as $key) {
+            $translations->put($key->name, $this->getKey($key->name, $locale->name));
+        }
+
+        return $translations;
     }
 
     public function enableEditMode()

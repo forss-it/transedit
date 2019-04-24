@@ -4,8 +4,8 @@ namespace Dialect\TransEdit;
 
 use Dialect\TransEdit\Models\Key;
 use Illuminate\Support\HtmlString;
-use Illuminate\Support\Facades\Cache;
 use Dialect\TransEdit\Models\Locale;
+use Illuminate\Support\Facades\Cache;
 use Dialect\TransEdit\Models\Translation;
 
 class TransEdit
@@ -94,7 +94,7 @@ class TransEdit
             'value' => $val,
         ]);
 
-        if(config('transedit.use_cache')) {
+        if (config('transedit.use_cache')) {
             Cache::put("{$this->locale}.{$key}", $val);
         }
 
@@ -118,8 +118,7 @@ class TransEdit
 
     protected function getTranslationFromKey($key, $locale)
     {
-        if (config('transedit.use_cache') && Cache::has("{$locale}.{$key}"))
-        {
+        if (config('transedit.use_cache') && Cache::has("{$locale}.{$key}")) {
             return Cache::get("{$locale}.{$key}");
         }
 
@@ -129,7 +128,7 @@ class TransEdit
             return $query->where('name', $key);
         })->first();
 
-        if(config('transedit.use_cache')) {
+        if (config('transedit.use_cache')) {
             Cache::forever("{$locale}.{$key}", $translation && $translation->value ? $translation->value : false);
         }
 

@@ -4,6 +4,7 @@ namespace Dialect\TransEdit;
 
 use Dialect\TransEdit\Models\Key;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Facades\Cache;
 use Dialect\TransEdit\Models\Locale;
 use Dialect\TransEdit\Models\Translation;
 
@@ -93,6 +94,10 @@ class TransEdit
             'value' => $val,
         ]);
 
+        if(config('transedit.use_cache')) {
+            Cache::put("{$this->locale}.{$key}", $val);
+        }
+
         return $this;
     }
 
@@ -103,7 +108,7 @@ class TransEdit
         if (! $translation && config('transedit.fallback_locale')) {
             $translation = $this->getTranslationFromKey($key, config('transedit.fallback_locale'));
         }
-        $value = $translation ? $translation->value : $key;
+        $value = $translation ? $translation : $key;
         if ($this->editMode) {
             return $this->returnVueComponent($key, $value);
         }
@@ -113,11 +118,22 @@ class TransEdit
 
     protected function getTranslationFromKey($key, $locale)
     {
-        return $translation = Translation::whereHas('locale', function ($query) use ($locale) {
+        if (config('transedit.use_cache') && Cache::has("{$locale}.{$key}"))
+        {
+            return Cache::get("{$locale}.{$key}");
+        }
+
+        $translation = Translation::whereHas('locale', function ($query) use ($locale) {
             return $query->where('name', $locale ? $locale : $this->locale);
         })->whereHas('key', function ($query) use ($key) {
             return $query->where('name', $key);
         })->first();
+
+        if(config('transedit.use_cache')) {
+            Cache::forever("{$locale}.{$key}", $translation && $translation->value ? $translation->value : false);
+        }
+
+        return $translation ? $translation->value : $key;
     }
 
     protected function returnVueComponent($key, $val)

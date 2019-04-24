@@ -6,5 +6,5 @@ return [
     'fallback_locale' => 'en',
 
     // Enable to cache all keys
-    'use_cache' => false
+    'use_cache' => false,
 ];

@@ -42,6 +42,5 @@
         }
     },
     "require": {
-        "genealabs/laravel-model-caching": "^0.3"
     }
 }

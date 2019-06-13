@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Key extends Model
 {
-
     protected $table = 'transedit_keys';
     protected $guarded = ['id'];
 

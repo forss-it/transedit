@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'default_locale' => 'en',
+    'default_locale' => env('TRANSEDIT_DEFAULT_LOCALE', 'en'),
     //set to null to disable fallback locale
-    'fallback_locale' => 'en',
+    'fallback_locale' => env('TRANSEDIT_FALLBACK_LOCALE', 'en'),
 
     // Enable to cache all keys
-    'use_cache' => false,
+    'use_cache' => env('TRANSEDIT_CACHE', true),
 ];

@@ -7,8 +7,8 @@ Route::get('/transedit/locales', '\Dialect\TransEdit\Controllers\TransEditContro
 Route::post('/transedit/setlocale', '\Dialect\TransEdit\Controllers\TransEditController@setCurrentLocale');
 
 Route::get('/js/transedit.js', function () {
-    if(config('transedit.use_cache')) {
-        $translations = cache()->rememberForever('transedit.js', function() {
+    if (config('transedit.use_cache')) {
+        $translations = cache()->rememberForever('transedit.js', function () {
             return transEdit()->getAllTranslationsForLocale(request('v') ?: transEdit()->getCurrentLocale())->toArray();
         });
     } else {

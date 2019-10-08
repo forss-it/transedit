@@ -9,8 +9,8 @@ Route::post('/transedit/setlocale', '\Dialect\TransEdit\Controllers\TransEditCon
 Route::get('/js/transedit.js', function () {
     $locale = request('v') ?: transEdit()->getCurrentLocale();
 
-    if(config('transedit.use_cache')) {
-        $translations = cache()->rememberForever("transedit.js.$locale", function() use ($locale) {
+    if (config('transedit.use_cache')) {
+        $translations = cache()->rememberForever("transedit.js.$locale", function () use ($locale) {
             return transEdit()->getAllTranslationsForLocale($locale)->toArray();
         });
     } else {

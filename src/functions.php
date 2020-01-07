@@ -8,9 +8,10 @@ if (! function_exists('transEdit')) {
     function transEdit($key = null, $val = null, $locale = 'current')
     {
         $app = app('transedit');
-        if ($key && ! $val) {
+       
+        if ($key !== null && ! $val) {
             return $app->locale($locale)->key($key);
-        } elseif ($key && $val) {
+        } elseif ($key !== null && $val) {
             return $app->locale($locale)->key($key, $val);
         }
 

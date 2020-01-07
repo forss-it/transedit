@@ -3,10 +3,10 @@
 namespace Dialect\TransEdit;
 
 use Dialect\TransEdit\Models\Key;
-use Illuminate\Support\HtmlString;
 use Dialect\TransEdit\Models\Locale;
-use Illuminate\Support\Facades\Cache;
 use Dialect\TransEdit\Models\Translation;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\HtmlString;
 
 class TransEdit
 {

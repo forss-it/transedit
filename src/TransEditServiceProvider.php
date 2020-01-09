@@ -2,6 +2,7 @@
 
 namespace Dialect\TransEdit;
 
+use Dialect\TransEdit\Console\Commands\AddLangFilesToDatabase;
 use Illuminate\Support\ServiceProvider;
 
 class TransEditServiceProvider extends ServiceProvider
@@ -25,6 +26,8 @@ class TransEditServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../assets/' => resource_path('assets'),
         ], 'assets');
+
+        $this->registerCommands();
     }
 
     /**
@@ -35,5 +38,19 @@ class TransEditServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('transedit', TransEdit::class);
+    }
+
+    /**
+     * Register package commands.
+     *
+     * @return void
+     */
+    private function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                AddLangFilesToDatabase::class,
+            ]);
+        }
     }
 }

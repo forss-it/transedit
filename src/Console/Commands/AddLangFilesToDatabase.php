@@ -44,13 +44,13 @@ class AddLangFilesToDatabase extends Command
         ]);
 
         $translations->each(function ($item, $key) {
-            if($item && !empty($item) && !is_array($item)){
+            if ($item && ! empty($item) && ! is_array($item)) {
                 $item->each(function ($k, $trans) {
-                    if($trans && !empty($k)){
+                    if ($trans && ! empty($k)) {
                         info($trans);
-                        $lang = explode(".", $trans);
-                        foreach($k as $langKey => $langVal) {
-                            transEdit($lang[1] . '.' . $langKey, $langVal, $lang[0]);
+                        $lang = explode('.', $trans);
+                        foreach ($k as $langKey => $langVal) {
+                            transEdit($lang[1].'.'.$langKey, $langVal, $lang[0]);
                         }
                     }
                 });
@@ -63,12 +63,12 @@ class AddLangFilesToDatabase extends Command
         $path = resource_path('lang');
 
         return collect(File::allFiles($path))->flatMap(function ($file) {
-            if($file->getBasename('.php') == 'auth' || $file->getBasename('.php') == 'validation' || $file->getExtension() != 'php') {
+            if ($file->getBasename('.php') == 'auth' || $file->getBasename('.php') == 'validation' || $file->getExtension() != 'php') {
                 return [];
             }
             $key = ($translation = $file->getBasename('.php'));
 
-            return [$file->getRelativePath() . '.' . $key => trans($translation, [], $file->getRelativePath())];
+            return [$file->getRelativePath().'.'.$key => trans($translation, [], $file->getRelativePath())];
         });
     }
 
@@ -78,8 +78,8 @@ class AddLangFilesToDatabase extends Command
 
         if (is_string($path) && is_readable($path)) {
             return collect(File::allFiles($path))->map(function ($file) use ($path) {
-                if($file->getExtension() == 'json'){
-                    return [$file->getRelativePath() . '.' . $file->getBasename('.json') => json_decode(file_get_contents($file->getRealPath()), true)];
+                if ($file->getExtension() == 'json') {
+                    return [$file->getRelativePath().'.'.$file->getBasename('.json') => json_decode(file_get_contents($file->getRealPath()), true)];
                 }
             });
         }

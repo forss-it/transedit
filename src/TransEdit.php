@@ -119,7 +119,7 @@ class TransEdit
     protected function getTranslationFromKey($key, $locale)
     {
         $locale = $locale ?: $this->getCurrentLocale();
-        
+
         if (config('transedit.use_cache') && Cache::has("{$locale}.{$key}")) {
             return Cache::get("{$locale}.{$key}");
         }

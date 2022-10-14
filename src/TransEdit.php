@@ -3,10 +3,10 @@
 namespace Dialect\TransEdit;
 
 use Dialect\TransEdit\Models\Key;
-use Illuminate\Support\HtmlString;
 use Dialect\TransEdit\Models\Locale;
-use Illuminate\Support\Facades\Cache;
 use Dialect\TransEdit\Models\Translation;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\HtmlString;
 
 class TransEdit
 {
@@ -118,6 +118,8 @@ class TransEdit
 
     protected function getTranslationFromKey($key, $locale)
     {
+        $locale = $locale ?: $this->getCurrentLocale();
+
         if (config('transedit.use_cache') && Cache::has("{$locale}.{$key}")) {
             return Cache::get("{$locale}.{$key}");
         }

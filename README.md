@@ -63,3 +63,19 @@ Migrate database
        
 ```
 
+## Artisan Command
+
+Adds all Laravel language files from the lang/ folder into transedit:
+```
+transedit:addLangFilesToDatabase
+```
+Ex. lang/sv/article.php
+```
+<?php
+
+return [
+	"recipe" => "Recept",
+];
+```
+When added to transedit, it can be reached for with the key transedit('article.recipe'), 
+just like you would use Laravel's own translation: @lang("article.recipe")

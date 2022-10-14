@@ -77,7 +77,7 @@ class AddLangFilesToDatabase extends Command
         $path = resource_path('lang');
 
         if (is_string($path) && is_readable($path)) {
-            return collect(File::allFiles($path))->map(function ($file) use ($path) {
+            return collect(File::allFiles($path))->map(function ($file) {
                 if ($file->getExtension() == 'json') {
                     return [$file->getRelativePath().'.'.$file->getBasename('.json') => json_decode(file_get_contents($file->getRealPath()), true)];
                 }

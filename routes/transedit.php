@@ -1,7 +1,6 @@
 <?php
 
-
-Route::middleware(['web'])->group(function() {
+Route::middleware(['web'])->group(function () {
     Route::post('/transedit/setkey', '\Dialect\TransEdit\Controllers\TransEditController@setKey');
 
     Route::get('/transedit/locales', '\Dialect\TransEdit\Controllers\TransEditController@locales');
@@ -11,8 +10,8 @@ Route::middleware(['web'])->group(function() {
     Route::get('/js/transedit.js', function () {
         $locale = request('v') ?: transEdit()->getCurrentLocale();
 
-        if(config('transedit.use_cache')) {
-            $translations = cache()->rememberForever("transedit.js.$locale", function() use ($locale) {
+        if (config('transedit.use_cache')) {
+            $translations = cache()->rememberForever("transedit.js.$locale", function () use ($locale) {
                 return transEdit()->getAllTranslationsForLocale($locale)->toArray();
             });
         } else {

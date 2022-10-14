@@ -42,5 +42,14 @@
         }
     },
     "require": {
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../transedit/",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }

@@ -19,6 +19,15 @@ Route::get('/js/transedit.js', function () {
 
     $js = ('window.transEditTranslations = '.json_encode($translations).';');
     $js .= 'window.transEdit = function(key){ var translation = window.transEditTranslations[key]; if(!translation){ return key; } return translation; }';
+        if(config('transedit.use_cache')) {
+            $translations = cache()->rememberForever("transedit.js.$locale", function() use ($locale) {
+                return transEdit()->getAllTranslationsForLocale($locale)->toArray();
+            });
+        } else {
+            $translations = transEdit()->getAllTranslationsForLocale($locale)->toArray();
+        }
 
-    return response($js)->header('Content-Type', 'application/javascript');
+        $js .= 'window.transEdit = function(key){ var translation = window.transEditTranslations[key]; if(!translation){ return key; } return translation; }';
+
+        return response($js)->header('Content-Type', 'application/javascript');
 });

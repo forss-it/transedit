@@ -49,6 +49,9 @@ Migrate database
        //you can use the helper functions to quicker get keys
        transEdit()->key('key');
        transEdit('key');
+       
+       //It's also possible to replace variables
+       transEdit('You have $1 months left on your subscription of $2.', ['12', 'Netflix']);
         
        ##set current locale for whole system to use##
        transEdit()->setCurrentLocale('locale');

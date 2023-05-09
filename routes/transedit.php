@@ -19,7 +19,31 @@ Route::middleware(['web'])->group(function () {
         }
 
         $js = ('window.transEditTranslations = '.json_encode($translations, JSON_UNESCAPED_UNICODE).';');
-        $js .= 'window.transEdit = function(key){ var translation = window.transEditTranslations[key]; if(!translation){ return key; } return translation; }';
+        $js .= <<<EOD
+            window.transEdit = function(key, values = []) {
+                let translation = window.transEditTranslations[key];
+
+                if(!translation) {
+                    translation = key;
+                }
+
+                try {
+                    let matches = translation.match(/(\\\$\d)/g);
+                    if(matches) {
+                        for(let i = 0; i < matches.length; i++) {
+                            let key = parseInt(matches[i].substring(1)) - 1;
+                            if(key in values) {
+                                translation = translation.replace(matches[i], values[key]);
+                            }
+                        }
+                    }
+                } catch(e) {
+                    //
+                }
+
+                return translation;
+            }
+EOD;
 
         return response($js)->header('Content-Type', 'application/javascript');
     });

@@ -14,10 +14,6 @@
          <span v-if="error" class="error">Something went wrong!</span>
       </div>
    </div>
-
-
-
-
 </template>
 
 <script>

@@ -69,9 +69,26 @@ class TransEdit
         return $this->locale;
     }
 
+    public function replaceVariables($key, array $values)
+    {
+        $value = $this->getKey($key);
+
+        preg_match_all('/(\$\d)/', $value, $matches);
+        foreach($matches[0] as $match) {
+            $index = ((int) substr($match, 1)) - 1;
+            if(array_key_exists($index, $values)) {
+                $value = str_replace($match, $values[$index], $value);
+            }
+        }
+
+        return $value;
+    }
+
     public function key($key, $val = null)
     {
-        if ($val) {
+        if (is_array($val)) {
+            return $this->replaceVariables($key, $val);
+        } else if ($val) {
             return $this->setKey($key, $val);
         }
 

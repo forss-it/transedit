@@ -3,6 +3,7 @@
 namespace Dialect\TransEdit;
 
 use Dialect\TransEdit\Console\Commands\AddLangFilesToDatabase;
+use Dialect\TransEdit\Console\Commands\AddMissingPhrases;
 use Illuminate\Support\ServiceProvider;
 
 class TransEditServiceProvider extends ServiceProvider
@@ -50,6 +51,7 @@ class TransEditServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 AddLangFilesToDatabase::class,
+                AddMissingPhrases::class,
             ]);
         }
     }

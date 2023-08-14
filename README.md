@@ -66,11 +66,12 @@ Migrate database
        
 ```
 
-## Artisan Command
+## Artisan Commands
 
+### Add existing translations
 Adds all Laravel language files from the lang/ folder into transedit:
 ```
-transedit:addLangFilesToDatabase
+transedit:add-lang-files-to-database
 ```
 Ex. lang/sv/article.php
 ```
@@ -82,3 +83,11 @@ return [
 ```
 When added to transedit, it can be reached for with the key transedit('article.recipe'), 
 just like you would use Laravel's own translation: @lang("article.recipe")
+
+### Add missing translations
+Search through resource files and add missing phrases to the database:
+```
+transedit:add-missing-phrases
+```
+This is great when your developing, just add all phrases using `transEdit('My translated text')`
+and run the command.

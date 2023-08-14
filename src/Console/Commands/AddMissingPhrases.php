@@ -20,9 +20,8 @@ class AddMissingPhrases extends Command
         $search_extensions = ['php', 'vue', 'js'];
         $missing_phrases = collect();
 
-        foreach(new \RecursiveIteratorIterator($iterator) as $file)
-        {
-            if($file->isDir() || !in_array($file->getExtension(), $search_extensions)) {
+        foreach (new \RecursiveIteratorIterator($iterator) as $file) {
+            if ($file->isDir() || ! in_array($file->getExtension(), $search_extensions)) {
                 continue;
             }
 
@@ -31,29 +30,29 @@ class AddMissingPhrases extends Command
 
         $locales = Locale::all();
 
-        foreach($missing_phrases as $phrase) {
-            foreach($locales as $locale) {
+        foreach ($missing_phrases as $phrase) {
+            foreach ($locales as $locale) {
                 transEdit($phrase, $phrase, $locale->name);
             }
         }
 
-        if($missing_phrases->count() > 0) {
+        if ($missing_phrases->count() > 0) {
             $this->info("Successfully added {$missing_phrases->count()} phrases to the database.");
         } else {
             $this->info('No missing phrases found.');
         }
     }
 
-    private function findMissingPhrases($file) : Collection
+    private function findMissingPhrases($file): Collection
     {
         $missing_phrases = collect();
 
-        foreach($this->findPhrases($file) as $phrase) {
-            if(in_array($phrase, $this->seen_phrases)) {
+        foreach ($this->findPhrases($file) as $phrase) {
+            if (in_array($phrase, $this->seen_phrases)) {
                 continue;
             }
 
-            if(!Key::where('name', $phrase)->exists()) {
+            if (! Key::where('name', $phrase)->exists()) {
                 $missing_phrases->push($phrase);
             }
 
@@ -63,7 +62,7 @@ class AddMissingPhrases extends Command
         return $missing_phrases;
     }
 
-    private function findPhrases($file) : Collection
+    private function findPhrases($file): Collection
     {
         $phrases = collect();
 

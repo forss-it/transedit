@@ -12,14 +12,14 @@ class AddLangFilesToDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'transedit:addLangFilesToDatabase';
+    protected $signature = 'transedit:add-lang-files-to-database';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Adds translations from existing Laravel Lang-files into transedit tables';
+    protected $description = 'Adds translations from existing Laravel lang-files into transedit tables';
 
     /**
      * Create a new command instance.

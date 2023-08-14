@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Translations for Laravel with inline edit support",
     "keywords": [
-        "dialect",
+        "forss",
         "translate",
         "transedit",
         "laravel",
@@ -14,9 +14,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Dialect Katrineholm",
-            "email": "katrineholm@dialect.se",
-            "homepage": "https://github.com/dialect-katrineholm",
+            "name": "Forss IT AB",
+            "email": "info@forss.se",
+            "homepage": "https://github.com/forss-it",
             "role": "Developer"
         }
     ],

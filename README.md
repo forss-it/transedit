@@ -52,7 +52,9 @@ Migrate database
        
        //It's also possible to replace variables
        transEdit('You have $1 months left on your subscription of $2.', ['12', 'Netflix']);
-        
+
+       //or named variables
+        transEdit('You have $MONTHS months left on your subscription of $SERVICE.', ['months' => '12', 'service' => 'Netflix']);
        ##set current locale for whole system to use##
        transEdit()->setCurrentLocale('locale');
        

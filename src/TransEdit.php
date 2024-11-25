@@ -73,11 +73,27 @@ class TransEdit
     {
         $value = $this->getKey($key);
 
-        preg_match_all('/(\$\d)/', $value, $matches);
-        foreach ($matches[0] as $match) {
-            $index = ((int) substr($match, 1)) - 1;
-            if (array_key_exists($index, $values)) {
-                $value = str_replace($match, $values[$index], $value);
+        // Create a case-insensitive version of $values for named variables
+        $valuesInsensitive = array_change_key_case($values, CASE_LOWER);
+
+        // Find all matches of variables: $ followed by digits or word characters
+        preg_match_all('/\$(\d+|\w+)/', $value, $matches);
+
+        foreach ($matches[0] as $i => $fullMatch) {
+            $var = $matches[1][$i]; // Variable name (number or word)
+
+            if (ctype_digit($var)) {
+                // Unnamed variable (e.g., $1, $2)
+                $index = ((int) $var) - 1;
+                if (array_key_exists($index, $values)) {
+                    $value = str_replace($fullMatch, $values[$index], $value);
+                }
+            } else {
+                // Named variable (e.g., $NAME, $PLATFORM)
+                $varLower = strtolower($var);
+                if (array_key_exists($varLower, $valuesInsensitive)) {
+                    $value = str_replace($fullMatch, $valuesInsensitive[$varLower], $value);
+                }
             }
         }
 

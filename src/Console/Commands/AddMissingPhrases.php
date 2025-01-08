@@ -28,6 +28,7 @@ class AddMissingPhrases extends Command
 
         if ($missing_phrases->isEmpty()) {
             $this->info('No missing phrases found.');
+
             return;
         }
 
@@ -56,7 +57,7 @@ class AddMissingPhrases extends Command
         $missing_phrases = collect();
 
         foreach (new \RecursiveIteratorIterator($iterator) as $file) {
-            if ($file->isDir() || !in_array($file->getExtension(), $search_extensions)) {
+            if ($file->isDir() || ! in_array($file->getExtension(), $search_extensions)) {
                 continue;
             }
 
@@ -85,12 +86,12 @@ class AddMissingPhrases extends Command
      */
     private function createMigration(Collection $phrases): string
     {
-        $migrationName = date('Y_m_d_His') . '_add_missing_transedit_phrases.php';
+        $migrationName = date('Y_m_d_His').'_add_missing_transedit_phrases.php';
         $migrationPath = database_path("migrations/{$migrationName}");
 
         $phrasesArray = var_export($phrases->values()->toArray(), true);
         $defaultLocale = $this->option('locale') ?: 'en';
-        
+
         $migrationStub = <<<PHP
 <?php
 

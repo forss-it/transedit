@@ -14,7 +14,8 @@ class AddMissingPhrases extends Command
      * Use --direct=1 to skip creating a migration and push directly to DB.
      */
     protected $signature = 'transedit:add-missing-phrases 
-                            {--direct=0 : Whether to skip creating a migration and push phrases directly to DB}';
+                            {--direct=0 : Whether to skip creating a migration and push phrases directly to DB}
+                            {--locale=en : The locale to add the missing phrases to}';
 
     protected $description = 'Searches the resource directory for missing phrases.';
 
@@ -90,6 +91,7 @@ class AddMissingPhrases extends Command
 
         // Convert the missing phrases into an exportable array string
         $phrasesArray = var_export($phrases->values()->toArray(), true);
+        $defaultLocale = $this->option('locale') ?: 'en';
 
         // Build the migration file contents
         $migrationStub = <<<PHP
@@ -104,14 +106,12 @@ return new class extends Migration
 {
     public function up()
     {
-        \$locales = Locale::all();
+        \$locale = '{$defaultLocale}';
         \$missingPhrases = {$phrasesArray};
 
         // Insert each phrase into the database for all locales
         foreach (\$missingPhrases as \$phrase) {
-            foreach (\$locales as \$locale) {
-                transEdit(\$phrase, \$phrase, \$locale->name);
-            }
+            transEdit()->locale(\$locale)->setKey(\$phrase, \$phrase);
         }
     }
 

@@ -1,9 +1,3 @@
-Below is an **expanded README** that includes details on how the `add-missing-phrases` command can optionally create a migration file or push phrases directly to the database.
-
----
-
-[![Build Status](https://travis-ci.com/dialect-katrineholm/transedit.svg?token=9jwqzmZxpdyqbmtqpE8y&branch=master)](https://travis-ci.com/dialect-katrineholm/transedit)
-
 # TransEdit
 
 **TransEdit** is a Laravel plugin designed to store and manage localization strings in a database with built-in caching. It offers a flexible and interactive way to handle language translations, including an optional *edit mode*, which allows users to edit translations directly in the browser by simply double-clicking any highlighted text.

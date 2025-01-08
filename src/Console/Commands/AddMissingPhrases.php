@@ -85,15 +85,12 @@ class AddMissingPhrases extends Command
      */
     private function createMigration(Collection $phrases): string
     {
-        // Generate a timestamp-based migration name
         $migrationName = date('Y_m_d_His') . '_add_missing_transedit_phrases.php';
         $migrationPath = database_path("migrations/{$migrationName}");
 
-        // Convert the missing phrases into an exportable array string
         $phrasesArray = var_export($phrases->values()->toArray(), true);
         $defaultLocale = $this->option('locale') ?: 'en';
-
-        // Build the migration file contents
+        
         $migrationStub = <<<PHP
 <?php
 

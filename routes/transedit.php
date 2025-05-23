@@ -18,26 +18,31 @@ Route::middleware(['web'])->group(function () {
             $translations = transEdit()->getAllTranslationsForLocale($locale)->toArray();
         }
 
+        // Convert keys to lowercase if case_sensitive is false
+        if (!config('transedit.case_sensitive', true)) {
+            $translations = array_change_key_case($translations, CASE_LOWER);
+        }
+
         $js = ('window.transEditTranslations = '.json_encode($translations, JSON_UNESCAPED_UNICODE).';');
         $js .= <<<EOD
             window.transEdit = function(key, values = []) {
-                let translation = window.transEditTranslations[key];
+                let translation = window.transEditTranslations[key.toLowerCase()] || window.transEditTranslations[key];
 
-                if(!translation) {
+                if (!translation) {
                     translation = key;
                 }
 
                 try {
                     let matches = translation.match(/(\\\$\d)/g);
-                    if(matches) {
-                        for(let i = 0; i < matches.length; i++) {
+                    if (matches) {
+                        for (let i = 0; i < matches.length; i++) {
                             let key = parseInt(matches[i].substring(1)) - 1;
-                            if(key in values) {
+                            if (key in values) {
                                 translation = translation.replace(matches[i], values[key]);
                             }
                         }
                     }
-                } catch(e) {
+                } catch (e) {
                     //
                 }
 

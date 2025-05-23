@@ -151,7 +151,7 @@ class TransEdit
 
     protected function getTranslationFromKey($key, $locale)
     {
-        if(config('transedit.case_sensitive') && !is_null($key)) {
+        if (config('transedit.case_sensitive') && ! is_null($key)) {
             $key = strtolower($key);
         }
         $locale = $locale ?: $this->getCurrentLocale();

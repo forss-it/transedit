@@ -7,4 +7,5 @@ return [
 
     // Enable to cache all keys
     'use_cache' => env('TRANSEDIT_CACHE', true),
+    'case_sensitive' => env('TRANSEDIT_CASE_SENSITIVE', true),
 ];

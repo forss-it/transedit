@@ -19,7 +19,7 @@ Route::middleware(['web'])->group(function () {
         }
 
         // Convert keys to lowercase if case_sensitive is false
-        if (!config('transedit.case_sensitive', true)) {
+        if (! config('transedit.case_sensitive', true)) {
             $translations = array_change_key_case($translations, CASE_LOWER);
         }
 
